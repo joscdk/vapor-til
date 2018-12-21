@@ -64,6 +64,11 @@ public func configure(
       fatalError("Failed to create PostgresConfig")
     }
     databaseConfig = urlConfig
+  } else if let cloud2Url = Environment.get("POSTGRESQL_URL") {
+    guard let urlConfig = PostgreSQLDatabaseConfig(url: cloud2Url) else {
+      fatalError("Failed to create PostgresConfig")
+    }
+    databaseConfig = urlConfig
   } else {
     let databaseName: String
     let databasePort: Int
